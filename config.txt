@@ -1,0 +1,73 @@
+//INPUT_VIDEO     foreman_qcif.y4m.yuv	//300 frames
+INPUT_VIDEO     foreman_cif.y4m.yuv	//300 frames
+//INPUT_VIDEO     SthlmPan400.yuv	//500 frames
+//INPUT_VIDEO     InToTree_720p50_400.yuv	//500 frames
+//INPUT_VIDEO     InToTree_1080p50_400.yuv	//500 frames
+//INPUT_VIDEO     CrowdRun_720p_50_400.yuv	//500 frames
+//INPUT_VIDEO     CrowdRun_1080p_50_400.yuv	//500 frames
+//INPUT_VIDEO     DucksTakeOff_720p_50_400.yuv	//500 frames
+//INPUT_VIDEO     OldTownCross_720p50_400.yuv //500 frames
+//INPUT_VIDEO     ParkRun400.yuv	//500 frames
+//INPUT_VIDEO      NewMobCal400.yuv	//500 frames
+//INPUT_VIDEO     football_sif.y4m.yuv //124 frames
+//INPUT_VIDEO     mobile_cif.yuv	//300 frames
+//INPUT_VIDEO      ParkJoy_720p_50_400.yuv
+//INPUT_VIDEO        ParkJoy_1080p_50_400.yuv
+//INPUT_VIDEO			irobot.yuv
+//INPUT_VIDEO			spiderman.yuv
+//INPUT_VIDEO			gladiator.yuv
+
+//input parameters
+IMG_SIZE		CIF
+FRAMECOUNT		100
+BLOCKSIZE		16
+
+FSWIN			32
+BSWIN			5
+
+//flags
+REPLACE			1		//use to replace even numbered frames with interpolated ones
+FIRST_FS		0		//apply full search to first frame pair
+ALL_FS			0		//apply full search to entire sequence
+BI_FS			0		//apply bilateral search
+UPDATE			1		//enable updating mechanism for 3DRS
+OCCLUSION_TH	2		//occlusion detection threshold
+PASS_COUNT		1	//number of 3DRS passes
+EARLY_TERMINATE 0		//enable early termination for no-motion vectors
+NEW3DRS			0    //apply new 3DRS (ATME)
+
+UC_ALGO			FAVG	//select interpolation algorithm: FAVG,DYNM,STAM,TWOM,BI_FAVG,OBMC,MC
+
+
+//filenames
+OUTPUT_VIDEO	output.yuv
+MVs_FILE_BI		bi_MVs.txt	
+MVs_FILE		MVs.txt
+MV_X_FILE		MV_X.txt
+MV_Y_FILE		MV_Y.txt
+RESULTS			results.txt
+
+SAD_THRESHOLD 2500
+VECTOR_THRESHOLD 2 
+
+//3DRS parameters
+CANDIDATE_COUNT	3
+EXT_CANDIDATE_COUNT	4
+//SEARCH_LOCS		-1 0   2 2   0 -1   1 -2   2 -1   -2 -2   0 0   0 -2   3 -1   
+//SEARCH_LOCS		-1 0   0 -1   2 2   -1 0 //UPDATED
+//SEARCH_LOCS		    -1 0    0 -1  2 1 // ATME minimal set
+SEARCH_LOCS		    0 2    -1 -1  1 -1  //haan min
+//SEARCH_LOCS		    -1 0    0 -1  -2 1  0 1   0 0  2 1  1 0
+//EXT_SEARCH_LOCS	 0 0   2 -1  -2 -2   1 -2 -3 3  0 -2
+EXT_SEARCH_LOCS	     -2 1  0 1   0 0  1 0 // ATME extended set
+
+//3DRS weight definitions
+SPATIAL_COEF			1.0
+TEMPORAL_COEF			1.045
+UPDATE_COEF				1.1
+
+SAME_SPATIAL_COEF		1.0
+SAME_TEMPORAL_COEF		1.05
+SAME_UPDATE_COEF		1.1
+
+
